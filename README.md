@@ -92,6 +92,10 @@ Create the needed models for the `get specified city data` request that we will 
     -(instancetype)initWithDictionary:(NSDictionary<NSString *, id> *)dictionary;
     </details>
   
+## Step Two
+Implement the initializers for the created models.
+
+### Instructions
 #### Pollution Model Implementation
 - Implement the declared initializers in the `Pollution.m` file.
   - The designated initializer will live in the implementation body
@@ -110,7 +114,11 @@ Create the needed models for the `get specified city data` request that we will 
 ### ModelControllers
 Create the `CityAirQualityController.h/.m` files
 
-#### CityAirQuality.h
+## Step Three
+Create and implement the api calls needed to pull air quality data for a city.
+
+### Instructions
+#### CityAirQualityController.h
 On this file we will declare the various network call methods we will be using. 
 
 - Add `fetchSupportedCountries`, `fetchSupportedStatesInCountry`, `fetchSupportedCitiesInState`, and `fetchDataForCity` to the .h file
@@ -119,7 +127,7 @@ On this file we will declare the various network call methods we will be using.
   - `fetchSupportedCitiesInState` will take in a string parameter for the country, a string parameter for the state, and complete with an array of strings
   - `fetchDataForCity` will take in a string parameter for the country, a string parameter for the state, a string parameter for the city, and complete with a CityAirQuality object
     
-#### CityAirQuality.m
+#### CityAirQualityController.m
 We have four network call methods to implement. To make our lives easier when implementing them, we will use string constants to store the frequently used string values for the API calls. 
 
 - Above the class declaration, add string constants for the following:
@@ -165,11 +173,30 @@ Implement the function bodies inside the class declaration.
   - Add a queryItem for the city, user the string value for the city parameter as the value and "city" as the key
   - Perform your dataTask with the finalURL and complete with the CityAirQuality object found
   
-  
-### ViewControllers
-- Create a new CocoaTouch Class file subclassed from a UIViewController, change the language to Swift, and add the bridging header
-- import DVMCityAirQualityController.h to bridging header
-- CountriesListVC
-- StatesListVC
-- CitiesListVC
-- CityDetailsVC
+## Step Four
+### Instructions
+#### Bridging Header
+- Create a new CocoaTouch Class file named `CountriesListViewController` subclassed from a UIViewController, change the language to Swift, and add a `Bridging-Header
+- In the `Bridging-Header` import all of the `.h` files.
+
+#### Storyboards
+Looking at our network call methods, we have three methods that return an array of results that build off of one another. We'll display the results of our network calls in tableViews with basic cells. 
+
+- Navigate to `Main.storyboard`. Delete the existing ViewController, drag out a new ViewController, set it as your initial ViewController, and embed it in a NavigationController
+- Drag a `tableView` onto the ViewController and constrain it to all zeros along the top, bottom, leading, and trailing 
+- Add a prototype cell to the tableView and make it a basic cell, give it a reuseIdentifier "countryCell"
+- Subclass the ViewController as CountriesListViewController
+- Drag out another ViewController, add a `tableView` with a basic prototype cell and constrain it
+- From the CountriesListViewController, drag a `show` segue from the tableViewCell to the new ViewController
+  - Give the segue a reuseIdentifier "toStatesVC"
+  - Create a new CocoaTouch Class file named StatesListViewController subclassed from UIViewController, and subclass the storyboard ViewController.
+- Repeat the above process for the CitiesListViewController
+- Lastly, add a ViewController with labels to display the selected city's name, state, country, airQualityIndex, temperature, humidity, and windspeed.
+
+#### CountriesListViewController
+
+#### StatesListViewController
+
+#### CitiesListViewController
+
+#### CityDetailsViewController
