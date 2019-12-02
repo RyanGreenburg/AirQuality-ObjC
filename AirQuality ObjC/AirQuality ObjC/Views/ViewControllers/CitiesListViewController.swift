@@ -18,8 +18,6 @@ class CitiesListViewController: UIViewController {
             updateTableView()
         }
     }
-    let searchController = UISearchController()
-    var filteredData: [String] = []
 
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -28,7 +26,6 @@ class CitiesListViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        searchController.setupSearchControllerWith(self)
         guard let state = state,
             let country = country
             else { return }
@@ -48,7 +45,7 @@ class CitiesListViewController: UIViewController {
                 let destinationVC = segue.destination as? CityDetailViewController
                 else { return }
             
-            let selectedCity = searchController.searchIsActive ? filteredData[indexPath.row] : cities[indexPath.row]
+            let selectedCity = cities[indexPath.row]
             destinationVC.city = selectedCity
             destinationVC.state = state
             destinationVC.country = country
@@ -65,22 +62,13 @@ class CitiesListViewController: UIViewController {
 
 extension CitiesListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchController.searchIsActive ? filteredData.count : cities.count
+        return cities.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cityCell", for: indexPath)
-        let city = searchController.searchIsActive ? filteredData[indexPath.row] : cities[indexPath.row]
+        let city = cities[indexPath.row]
         cell.textLabel?.text = city
         return cell
-    }
-}
-
-extension CitiesListViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        guard let searchBarText = searchBar.text else { return }
-        filteredData = searchController.filer(cities, by: searchBarText)
-        updateTableView()
     }
 }

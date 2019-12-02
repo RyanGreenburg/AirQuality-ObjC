@@ -15,8 +15,6 @@ class CountryListViewController: UIViewController {
             updateTableView()
         }
     }
-    let searchController = UISearchController()
-    var filteredData: [String] = []
 
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -26,8 +24,6 @@ class CountryListViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        searchController.setupSearchControllerWith(self)
-        navigationItem.searchController = searchController
         DVMCityAirQualityController.fetchSupportedCountries { (countries) in
             if let countries = countries {
                 self.countries = countries
@@ -42,7 +38,7 @@ class CountryListViewController: UIViewController {
                 let destinationVC = segue.destination as? StatesListViewController
                 else { return }
             
-            let selectedCountry = searchController.searchIsActive ? filteredData[indexPath.row] : countries[indexPath.row]
+            let selectedCountry = countries[indexPath.row]
             
             destinationVC.country = selectedCountry
         }
@@ -59,23 +55,13 @@ class CountryListViewController: UIViewController {
 // MARK: - TableView DataSource/Delegate
 extension CountryListViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchController.searchIsActive ? filteredData.count : countries.count
+        return countries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "countryCell", for: indexPath)
-        let country = searchController.searchIsActive ? filteredData[indexPath.row] : countries[indexPath.row]
+        let country = countries[indexPath.row]
         cell.textLabel?.text = country
         return cell
-    }
-}
-
-// MARK: - UISearchResultsUpdating
-extension CountryListViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        guard let searchBarText = searchBar.text else { return }
-        filteredData = searchController.filer(countries, by: searchBarText)
-        updateTableView()
     }
 }

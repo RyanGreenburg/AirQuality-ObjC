@@ -16,8 +16,6 @@ class StatesListViewController: UIViewController {
             updateTableView()
         }
     }
-    let searchController = UISearchController()
-    var filteredData: [String] = []
 
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
@@ -27,8 +25,6 @@ class StatesListViewController: UIViewController {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        searchController.setupSearchControllerWith(self)
-        navigationItem.searchController = searchController
         guard let country = country else { return }
         DVMCityAirQualityController.fetchSupportedStates(inCountry: country) { (states) in
             if let states = states {
@@ -44,7 +40,7 @@ class StatesListViewController: UIViewController {
                 let country = country,
                 let destinationVC = segue.destination as? CitiesListViewController
                 else { return}
-            let selectedState = searchController.searchIsActive ? filteredData[indexPath.row] : states[indexPath.row]
+            let selectedState = states[indexPath.row]
             destinationVC.country = country
             destinationVC.state = selectedState
         }
@@ -60,22 +56,13 @@ class StatesListViewController: UIViewController {
 
 extension StatesListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchController.searchIsActive ? filteredData.count : states.count
+        return states.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "stateCell", for: indexPath)
-        let state = searchController.searchIsActive ? filteredData[indexPath.row] : states[indexPath.row]
+        let state = states[indexPath.row]
         cell.textLabel?.text = state
         return cell
-    }
-}
-
-extension StatesListViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        let searchBar = searchController.searchBar
-        guard let searchBarText = searchBar.text else { return }
-        filteredData = searchController.filer(states, by: searchBarText)
-        updateTableView()
     }
 }
