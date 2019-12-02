@@ -194,9 +194,35 @@ Looking at our network call methods, we have three methods that return an array 
 - Lastly, add a ViewController with labels to display the selected city's name, state, country, airQualityIndex, temperature, humidity, and windspeed.
 
 #### CountriesListViewController
+We will implement the code needed to display the Supported Countries. 
+
+- Start by opening the assistant editor and dragging out an outlet for the tableView called `tableView`
+- Extend the class and conform to `UITableViewDelegate` and `UITableViewDataSource` and plug in the stubs.
+
+We will need an array of countries to finish the the tableView data source methods. 
+
+- Create a local variable called `countries` that is an empty array of `String`
+- Using that array, finish writing the dataSource methods for the tableView
+- In `viewDidLoad` assign the `tableView.delegate` and `tableView.dataSource` to self
+- Call the `fetchSupportedCountries` method in `viewDidLoad`, assign the `self.countries` property to the array of strings returned in the completion block
+
+Since the network call is handled asychronosly, we will need to refresh the tableView when the call is complete. We will do this with a property observer.
+
+- At the bottom of the class, write a method called `updateTableView`
+  - In the body of the function, call `self.tableView.reloadData()` on the main thread
+- On the `countries` property, implement a didSet and call the `updateTableView` method
+
+We will need to pass the selected country string along to the next ViewController to perform the `fetchSupportedStatesInCountry` network call
+
+- In `prepare(for segue:)`, check your segue identifier, unwrap the indexPath and destination, and define a property for the selected index `let selectedCountry = countries[indexPath.row]
+- On the `StatesListViewController`, declare an option property for the country to recieve the data passed through the segue
+- Back on `CountriesListViewController`, assign the destinationVC's `country` property to the `selectedCountry` property
 
 #### StatesListViewController
+Repeat the process you just finished above for this ViewController. The only changes will be the name of the dataSource array, and you'll call the `fetchSupportedCitiesInState` method to populate your tableView. Additionally, you will need to pass the values for both the `country` property and the selected state through `prepare(for segue:)`
 
 #### CitiesListViewController
+Now, you'll repeate the proccess again for the supported cities. You will need to pass values for the `country`, `state`, and selected city to the `CityDetailViewController` to perform the `fetchDataForCity` method.
 
 #### CityDetailsViewController
+In `viewDidLoad`, call the `fetchDataForCity` method and assign the lables with the string values in the completion block. You should have lables to show the city name, state, country, airQualityIndex, temperature, humidity, and windspeed.
