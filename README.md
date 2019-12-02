@@ -226,3 +226,9 @@ Now, you'll repeate the proccess again for the supported cities. You will need t
 
 #### CityDetailsViewController
 In `viewDidLoad`, call the `fetchDataForCity` method and assign the lables with the string values in the completion block. You should have lables to show the city name, state, country, airQualityIndex, temperature, humidity, and windspeed.
+
+## Black Diamonds
+- Implement a UISearchController to search through the countries, states, and cities on their viewControllers
+  - Think about how you might be able to cut down on reused code the most using an extension and generics.
+- Instead of using `UITableViewDelegate` and `UITableViewDataSource`, use `UITableViewDiffableDataSource`
+- Switch from a tableView to a collectionView to display the results of the network calls.
