@@ -22,6 +22,7 @@
 		620C4FEE2387039F001500FE /* CitiesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C4FED2387039F001500FE /* CitiesListViewController.swift */; };
 		620C4FF0238703AB001500FE /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C4FEF238703AB001500FE /* CityDetailViewController.swift */; };
 		620C4FF623884776001500FE /* SearchControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C4FF523884776001500FE /* SearchControllerExtension.swift */; };
+		620C4FF92395B6F3001500FE /* BasicCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C4FF82395B6F3001500FE /* BasicCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		620C4FED2387039F001500FE /* CitiesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesListViewController.swift; sourceTree = "<group>"; };
 		620C4FEF238703AB001500FE /* CityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailViewController.swift; sourceTree = "<group>"; };
 		620C4FF523884776001500FE /* SearchControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerExtension.swift; sourceTree = "<group>"; };
+		620C4FF82395B6F3001500FE /* BasicCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				620C4FEC2387038A001500FE /* ViewControllers */,
+				620C4FFA2395B6FC001500FE /* CustomViews */,
 				620C4FF12387107B001500FE /* Storyboards */,
 			);
 			path = Views;
@@ -162,6 +165,14 @@
 				620C4FF523884776001500FE /* SearchControllerExtension.swift */,
 			);
 			path = "Helpers + Extensions";
+			sourceTree = "<group>";
+		};
+		620C4FFA2395B6FC001500FE /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				620C4FF82395B6F3001500FE /* BasicCollectionViewCell.swift */,
+			);
+			path = CustomViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -244,6 +255,7 @@
 				620C4FC32385DBF6001500FE /* SceneDelegate.m in Sources */,
 				620C4FE22385DE9D001500FE /* DVMPollution.m in Sources */,
 				620C4FE52386F42C001500FE /* DVMCityAirQualityController.m in Sources */,
+				620C4FF92395B6F3001500FE /* BasicCollectionViewCell.swift in Sources */,
 				620C4FDA2385DE41001500FE /* DVMCityAirQuality.m in Sources */,
 				620C4FF623884776001500FE /* SearchControllerExtension.swift in Sources */,
 				620C4FEB23870377001500FE /* StatesListViewController.swift in Sources */,
