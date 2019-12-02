@@ -9,7 +9,9 @@
 #import "DVMWeather.h"
 
 @implementation DVMWeather
-
+/**
+Initializes and returns a DVMWeather object with the given properties
+*/
 - (instancetype)initWithWeatherInfo:(NSInteger)temperature humidity:(NSInteger)humidity windSpeed:(NSInteger)windSpeed
 {
     self = [super init];

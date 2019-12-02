@@ -21,6 +21,7 @@
 		620C4FEB23870377001500FE /* StatesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C4FEA23870377001500FE /* StatesListViewController.swift */; };
 		620C4FEE2387039F001500FE /* CitiesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C4FED2387039F001500FE /* CitiesListViewController.swift */; };
 		620C4FF0238703AB001500FE /* CityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C4FEF238703AB001500FE /* CityDetailViewController.swift */; };
+		620C4FF623884776001500FE /* SearchControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C4FF523884776001500FE /* SearchControllerExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		620C4FEA23870377001500FE /* StatesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatesListViewController.swift; sourceTree = "<group>"; };
 		620C4FED2387039F001500FE /* CitiesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesListViewController.swift; sourceTree = "<group>"; };
 		620C4FEF238703AB001500FE /* CityDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailViewController.swift; sourceTree = "<group>"; };
+		620C4FF523884776001500FE /* SearchControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchControllerExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				620C4FDB2385DE4A001500FE /* Models */,
 				620C4FE62386F433001500FE /* ModelController */,
 				620C4FDC2385DE4F001500FE /* Views */,
+				620C4FF72388477D001500FE /* Helpers + Extensions */,
 				620C4FD72385DDA8001500FE /* Resources */,
 				620C4FE7238700A0001500FE /* AirQuality ObjC-Bridging-Header.h */,
 			);
@@ -151,6 +154,14 @@
 				620C4FC72385DBF6001500FE /* Main.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		620C4FF72388477D001500FE /* Helpers + Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				620C4FF523884776001500FE /* SearchControllerExtension.swift */,
+			);
+			path = "Helpers + Extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,6 +245,7 @@
 				620C4FE22385DE9D001500FE /* DVMPollution.m in Sources */,
 				620C4FE52386F42C001500FE /* DVMCityAirQualityController.m in Sources */,
 				620C4FDA2385DE41001500FE /* DVMCityAirQuality.m in Sources */,
+				620C4FF623884776001500FE /* SearchControllerExtension.swift in Sources */,
 				620C4FEB23870377001500FE /* StatesListViewController.swift in Sources */,
 				620C4FEE2387039F001500FE /* CitiesListViewController.swift in Sources */,
 			);

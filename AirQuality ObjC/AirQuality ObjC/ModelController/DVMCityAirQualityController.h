@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DVMCityAirQuality.h"
+@class DVMCityAirQuality;
 
 NS_ASSUME_NONNULL_BEGIN
 

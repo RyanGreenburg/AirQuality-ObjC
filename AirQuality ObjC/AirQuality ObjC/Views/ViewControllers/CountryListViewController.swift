@@ -17,12 +17,7 @@ class CountryListViewController: UIViewController {
     }
     let searchController = UISearchController()
     var filteredData: [String] = []
-    var searchBarIsEmpty: Bool {
-        return searchController.searchBar.text?.isEmpty ?? true
-    }
-    var searchIsActive: Bool {
-        return searchController.isActive && !searchBarIsEmpty
-    }
+
     // MARK: - Outlets
     @IBOutlet weak var tableView: UITableView!
     
@@ -31,7 +26,8 @@ class CountryListViewController: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        setupSearchController()
+        searchController.setupSearchControllerWith(self)
+        navigationItem.searchController = searchController
         DVMCityAirQualityController.fetchSupportedCountries { (countries) in
             if let countries = countries {
                 self.countries = countries
@@ -46,7 +42,8 @@ class CountryListViewController: UIViewController {
                 let destinationVC = segue.destination as? StatesListViewController
                 else { return }
             
-            let selectedCountry = countries[indexPath.row]
+            let selectedCountry = searchController.searchIsActive ? filteredData[indexPath.row] : countries[indexPath.row]
+            
             destinationVC.country = selectedCountry
         }
     }
@@ -57,25 +54,17 @@ class CountryListViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
-    
-    func setupSearchController() {
-        searchController.searchResultsUpdater = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search countries"
-        navigationItem.searchController = searchController
-        definesPresentationContext = true
-    }
 }
 
 // MARK: - TableView DataSource/Delegate
 extension CountryListViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchIsActive ? filteredData.count : countries.count
+        return searchController.searchIsActive ? filteredData.count : countries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "countryCell", for: indexPath)
-        let country = searchIsActive ? filteredData[indexPath.row] : countries[indexPath.row]
+        let country = searchController.searchIsActive ? filteredData[indexPath.row] : countries[indexPath.row]
         cell.textLabel?.text = country
         return cell
     }
@@ -86,11 +75,7 @@ extension CountryListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
         guard let searchBarText = searchBar.text else { return }
-        filterDataBy(searchBarText)
-    }
-    
-    func filterDataBy(_ searchText: String) {
-        filteredData = countries.filter({ $0.lowercased().contains(searchText.lowercased()) })
+        filteredData = searchController.filer(countries, by: searchBarText)
         updateTableView()
     }
 }

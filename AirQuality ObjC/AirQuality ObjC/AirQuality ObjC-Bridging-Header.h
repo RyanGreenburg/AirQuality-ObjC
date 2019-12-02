@@ -3,3 +3,6 @@
 //
 
 #import "DVMCityAirQualityController.h"
+#import "DVMCityAirQuality.h"
+#import "DVMWeather.h"
+#import "DVMPollution.h"

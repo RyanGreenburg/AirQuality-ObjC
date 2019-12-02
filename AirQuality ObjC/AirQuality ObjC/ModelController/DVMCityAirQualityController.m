@@ -6,6 +6,7 @@
 //  Copyright © 2019 RYAN GREENBURG. All rights reserved.
 //
 
+#import "DVMCityAirQuality.h"
 #import "DVMCityAirQualityController.h"
 
 static NSString *const baseURLString = @"https://api.airvisual.com/";
@@ -120,7 +121,7 @@ static NSString *const apiKey = @"2d50afec-b190-497d-9fbf-647cb91462b0";
     
     NSURL *baseURL = [NSURL URLWithString:baseURLString];
     NSURL *versionURL = [baseURL URLByAppendingPathComponent:version];
-    NSURL *statesURL = [versionURL URLByAppendingPathComponent:cityComponent];
+    NSURL *citiesURL = [versionURL URLByAppendingPathComponent:cityComponent];
     
     NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray new];
     
@@ -132,7 +133,7 @@ static NSString *const apiKey = @"2d50afec-b190-497d-9fbf-647cb91462b0";
     [queryItems addObject:countryQuery];
     [queryItems addObject:apiKeyQuery];
     
-    NSURLComponents *urlComponents = [[NSURLComponents alloc] initWithURL:statesURL resolvingAgainstBaseURL:true];
+    NSURLComponents *urlComponents = [[NSURLComponents alloc] initWithURL:citiesURL resolvingAgainstBaseURL:true];
     
     [urlComponents setQueryItems:queryItems];
     
@@ -172,7 +173,7 @@ static NSString *const apiKey = @"2d50afec-b190-497d-9fbf-647cb91462b0";
     
     NSURL *baseURL = [NSURL URLWithString:baseURLString];
     NSURL *versionURL = [baseURL URLByAppendingPathComponent:version];
-    NSURL *statesURL = [versionURL URLByAppendingPathComponent:cityDetailsComponent];
+    NSURL *cityURL = [versionURL URLByAppendingPathComponent:cityDetailsComponent];
     
     NSMutableArray<NSURLQueryItem *> *queryItems = [NSMutableArray new];
     
@@ -186,7 +187,7 @@ static NSString *const apiKey = @"2d50afec-b190-497d-9fbf-647cb91462b0";
     [queryItems addObject:countryQuery];
     [queryItems addObject:apiKeyQuery];
     
-    NSURLComponents *urlComponents = [[NSURLComponents alloc] initWithURL:statesURL resolvingAgainstBaseURL:true];
+    NSURLComponents *urlComponents = [[NSURLComponents alloc] initWithURL:cityURL resolvingAgainstBaseURL:true];
     
     [urlComponents setQueryItems:queryItems];
     

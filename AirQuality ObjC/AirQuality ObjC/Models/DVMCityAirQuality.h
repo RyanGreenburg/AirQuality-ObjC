@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "DVMWeather.h"
-#import "DVMPollution.h"
+@class DVMWeather;
+@class DVMPollution;
 
 NS_ASSUME_NONNULL_BEGIN
 
