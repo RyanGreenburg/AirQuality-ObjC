@@ -73,10 +73,12 @@ class CountryListViewController: UIViewController {
     }
     
     func updateDataSource(with items: [String], animated: Bool) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(items, toSection: .main)
-        dataSource?.apply(snapshot)
+        DispatchQueue.main.async {
+            var snapshot = NSDiffableDataSourceSnapshot<Section, String>()
+            snapshot.appendSections([.main])
+            snapshot.appendItems(items, toSection: .main)
+            self.dataSource?.apply(snapshot)
+        }
     }
     
     func createSectionLayout() -> NSCollectionLayoutSection {
@@ -114,7 +116,10 @@ extension CountryListViewController: UICollectionViewDelegate {
 extension CountryListViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         let searchBar = searchController.searchBar
-        guard let searchBarText = searchBar.text, !searchBarText.isEmpty else { return }
+        guard let searchBarText = searchBar.text, !searchBarText.isEmpty else {
+            updateDataSource(with: self.countries, animated: true)
+            return
+        }
         filteredData = searchController.filer(countries, by: searchBarText)
         updateDataSource(with: filteredData, animated: true)
     }
